@@ -5,6 +5,7 @@ self.cwd = ""
 if not self.debug then
     self.cwd = (...):gsub('%.init$', '') .. "."
 end
+Cache = Cache or require(self.cwd .. "cache")
 self.sprites = {}
 self.layers = {}
 

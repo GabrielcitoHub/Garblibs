@@ -1,5 +1,4 @@
 Sprite = require "init"
-Cache = require "cache"
 local sprites = {}
 local testlayer = Sprite:newLayer("Test", 5)
 local assetspath = "assets/images/"
