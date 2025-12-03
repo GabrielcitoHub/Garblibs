@@ -1,17 +1,22 @@
 local spritemanager = {}
 local self = spritemanager
+self.debug = false
+self.cwd = ""
+if not self.debug then
+    cwd = (...):gsub('%.init$', '') .. "."
+end
 self.sprites = {}
 self.layers = {}
 
 function self:_new(tag, path, x, y)
-    local spr = require "objects.sprite" (tag, path, x, y, {manager = self})
+    local spr = require(self.cwd .. "objects.sprite")(tag, path, x, y, {manager = self})
     spr:load()
 
     return spr
 end
 
 function self:_newLayer(tag, order, sprites)
-    local layer = require "objects.layer" (tag, order, sprites, {manager = self})
+    local layer = require(self.cwd .. "objects.layer")(tag, order, sprites, {manager = self})
     layer:load()
 
     return layer

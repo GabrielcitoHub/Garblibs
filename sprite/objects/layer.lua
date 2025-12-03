@@ -4,22 +4,22 @@ return function(tag, order, sprites, extra)
     extra = extra or {}
     
     function self:load()
-        require "layer.toggleables" (self)
-        require "layer.functions" (self)
-        return require "layer.load" (self, tag, order, sprites)
+        require(extra.cwd .. "layer.toggleables")(self)
+        require(extra.cwd .. "layer.functions")(self)
+        return require(extra.cwd .. "layer.load")(self, tag, order, sprites)
     end
 
     function self:update(dt)
         if not self.deltatime then dt = 1 end
-        return require "layer.update" (self, dt)
+        return require(extra.cwd .. "layer.update")(self, dt)
     end
 
     function self:draw()
-        return require "layer.draw" (self, extra.manager)
+        return require(extra.cwd .. "layer.draw")(self, extra.manager)
     end
 
     function self:remove()
-        return require "layer.remove" (self, extra.manager)
+        return require(extra.cwd .. "layer.remove")(self, extra.manager)
     end
 
     return self

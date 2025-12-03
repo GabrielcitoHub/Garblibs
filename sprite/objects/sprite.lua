@@ -4,22 +4,22 @@ return function(tag, path, x, y, extra)
     extra = extra or {}
 
     function self:load()
-        require "sprite.toggleables" (self)
-        require "sprite.functions" (self)
-        return require "sprite.load" (self, tag, path, x, y)
+        require(extra.cwd .. "sprite.toggleables")(self)
+        require(extra.cwd .. "sprite.functions")(self)
+        return require(extra.cwd .. "sprite.load")(self, tag, path, x, y)
     end
 
     function self:update(dt)
         if not self.deltatime then dt = 1 end
-        return require "sprite.update" (self, dt)
+        return require(extra.cwd .. "sprite.update")(self, dt)
     end
 
     function self:draw()
-        return require "sprite.draw" (self)
+        return require(extra.cwd .. "sprite.draw")(self)
     end
 
     function self:remove()
-        return require "sprite.remove" (self, extra.manager)
+        return require(extra.cwd .. "sprite.remove")(self, extra.manager)
     end
 
     return self
