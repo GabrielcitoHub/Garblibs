@@ -3,7 +3,7 @@ local self = spritemanager
 self.debug = false
 self.cwd = ""
 if not self.debug then
-    cwd = (...):gsub('%.init$', '') .. "."
+    self.cwd = (...):gsub('%.init$', '') .. "."
 end
 self.sprites = {}
 self.layers = {}
