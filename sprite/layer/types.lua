@@ -1,5 +1,7 @@
 ---@class Layer
-local self = {}
+local self = {
+    cwd = ""
+}
 
 -- Layer values
 self.tag = "tag"

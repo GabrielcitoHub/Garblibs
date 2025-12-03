@@ -76,7 +76,7 @@ return function(self)
         -- print(type)
         local data = utils:pathToQuads(self.image, path, type)
 
-        return require "sprite.animation" (self, tag, data, loop)
+        return require(self.cwd .. "sprite.animation")(self, tag, data, loop)
     end
 
     function self:removeAnimation(tag)

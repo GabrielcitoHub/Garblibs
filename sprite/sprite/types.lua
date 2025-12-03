@@ -1,5 +1,7 @@
 ---@class Sprite
-local self = {}
+local self = {
+    cwd = ""
+}
 
 -- Load
 -- Sprite values
