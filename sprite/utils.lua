@@ -1,7 +1,13 @@
 local utils = {}
 local self = utils
-local json = require "libs.json"
-local xml = require "libs.xml"
+local json
+local xml
+
+function self:setCWD(cwd)
+    self.cwd = cwd
+    json = require(self.cwd .. "libs.json")
+    xml = require(self.cwd .. "libs.xml")
+end
 
 function self:parseJSON(raw)
     return json.decode(raw)

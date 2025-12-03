@@ -1,5 +1,6 @@
 return function(self)
-    local utils = require "utils"
+    local utils = require(self.cwd .. "utils")
+    utils:setCWD(self.cwd)
     
     -- Position
     function self:setPosition(x, y)

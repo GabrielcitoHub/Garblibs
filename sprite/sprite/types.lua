@@ -1,6 +1,6 @@
 ---@class Sprite
 local self = {
-    cwd = ""
+    cwd = (...):gsub('%.init$', '') .. "."
 }
 
 -- Load
@@ -121,7 +121,7 @@ function self:setSize(width, height) end
 ---@return Animation
 -- Loads an animation file
 function self:newAnimation(tag, path, loop)
-    return require "sprite.animation" (self)
+    return require(self.cwd .. "sprite.animation")(self)
 end
 
 ---@param tag string
