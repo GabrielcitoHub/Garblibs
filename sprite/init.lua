@@ -1,6 +1,9 @@
 local spritemanager = {}
 local self = spritemanager
+
+-- Enable while testing main.lua
 self.debug = false
+
 self.cwd = ""
 if not self.debug then
     self.cwd = (...):gsub('%.init$', '') .. "."
