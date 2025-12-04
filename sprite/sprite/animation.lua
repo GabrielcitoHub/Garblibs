@@ -17,18 +17,27 @@ return function(self, tag, subanimations, loop)
         if speed then
             anim:setSpeed(speed)
         end
-        if loop then
+        if type(loop) ~= nil then
             anim:setLooping(loop)
+        end
+        if anim.started then
+            anim.started()
         end
     end
 
     function anim:pause()
         anim.playing = false
+        if anim.paused then
+            anim.paused()
+        end
     end
 
     function anim:stop()
         anim.current = 1
         anim.playing = false
+        if anim.stopped then
+            anim.stopped()
+        end
     end
 
     function anim:setFrame(frame)
@@ -44,16 +53,22 @@ return function(self, tag, subanimations, loop)
     end
 
     function anim:update(dt)
-        if not anim.playing then return end
+        if not anim.playing or not anim.frames then return end
+        if anim.current >= anim.frames and not anim.loop then return end
         anim.time = anim.time + self.speed * dt
-        if not anim.frames then return end
         
         if anim.time > 1 then
             anim.time = 0
             if anim.current < #anim.frames then
                 anim.current = anim.current + 1
             else
+                if anim.ended then
+                    anim.ended()
+                end
                 if anim.loop then
+                    if anim.looped then
+                        anim.looped()
+                    end
                     anim.current = 1
                 end
             end
@@ -64,10 +79,16 @@ return function(self, tag, subanimations, loop)
     end
 
     function anim:remove()
+        if anim.removed then
+            anim.removed()
+        end
         self.animations[anim.tag] = nil
     end
 
     self.animations[tag] = anim
+    if anim.created then
+        anim.created()
+    end
 
     return anim
 end
