@@ -54,22 +54,23 @@ return function(self, tag, subanimations, loop)
 
     function anim:update(dt)
         if not anim.playing or not anim.frames then return end
-        if anim.current >= #anim.frames and not anim.loop then return end
-        anim.time = anim.time + self.speed * dt
-        
-        if anim.time > 1 then
-            anim.time = 0
-            if anim.current < #anim.frames then
-                anim.current = anim.current + 1
-            else
-                if anim.ended then
-                    anim.ended()
-                end
-                if anim.loop then
-                    if anim.looped then
-                        anim.looped()
+        if anim.current <= #anim.frames and anim.loop then
+            anim.time = anim.time + self.speed * dt
+            
+            if anim.time > 1 then
+                anim.time = 0
+                if anim.current < #anim.frames then
+                    anim.current = anim.current + 1
+                else
+                    if anim.ended then
+                        anim.ended()
                     end
-                    anim.current = 1
+                    if anim.loop then
+                        if anim.looped then
+                            anim.looped()
+                        end
+                        anim.current = 1
+                    end
                 end
             end
         end
