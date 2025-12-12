@@ -4,7 +4,13 @@ local self = spritemanager
 -- Enable while testing main.lua
 self.debug = false
 
-self.cwd = (...):match('^(.*[%./])[^%.%/]+$') or ''
+local name = ...
+if name ~= "init" then
+    self.cwd = name .. "."
+else
+    self.cwd = ""
+end
+
 Cache = Cache or require(self.cwd .. "cache")
 self.sprites = {}
 self.layers = {}
